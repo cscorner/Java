@@ -38,10 +38,15 @@ public class Login extends JFrame implements ActionListener
 	     	try
 	       	{
 
-			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-Connection con = DriverManager.getConnection("jdbc:odbc:sydsn");
-	      		Statement st = con.createStatement();
-    ResultSet rs= st.executeQuery("select * from login where uname='"+s1+"' and password='"+s2+"'");
+			try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("Driver Loaded.");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/sycs2021","root","cscorner@1234");
+			System.out.println("Connection Created....");
+			String query="select * from login where uname=? and password=?";
+	      		PreparedStatement ps = con.prepareSatement(query);
+			
+    ResultSet rs= st.executeQuery();
 if(rs.next())
 	JOptionPane.showMessageDialog(this,"Login success..!!");
 else
