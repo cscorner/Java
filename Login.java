@@ -45,8 +45,10 @@ public class Login extends JFrame implements ActionListener
 			System.out.println("Connection Created....");
 			String query="select * from login where uname=? and password=?";
 	      		PreparedStatement ps = con.prepareSatement(query);
+				ps.setString(1,t1.getText());
+				ps.setString(2,pf.getText());
 			
-    ResultSet rs= st.executeQuery();
+    ResultSet rs= ps.executeQuery();
 if(rs.next())
 	JOptionPane.showMessageDialog(this,"Login success..!!");
 else
